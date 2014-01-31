@@ -1,5 +1,3 @@
-# should be in ~/.bashrc
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -115,7 +113,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PS1="\[\033[1;33m\]\w \[\033[0m\]"
+export old_prompt=$PS1
+#export PS1="\[\033[1;31m\]\w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\]\[\033[00m\] "
+export PS1="\[\033[1;31m\]\w \[\033[1;32m\]>>>\[\033[00m\] "
 
 export http_proxy="http://110050039:11061993@netmon.iitb.ac.in:80"
 export https_proxy="https://110050039:11061993@netmon.iitb.ac.in:80"
@@ -123,3 +123,35 @@ export HTTP_PROXY=$http_proxy
 export HTTPS_PROXY=$https_proxy
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+#. ~/powerline/powerline/bindings/bash/powerline.sh
+
+# Functions I've defined
+
+function retro {
+	dosbox $1 -fullscreen
+}
+
+function which-process {
+	ps -p $1 -o comm=
+}
+
+function bak {
+	cp "$1"{,.bak}
+}
+
+# display weather info
+#~/scripts/ansiweather/ansiweather
+
+# probably not needed
+export PATH=$PATH:~/openscenegraph/OpenSceneGraph-3.0.1/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/openscenegraph/OpenSceneGraph-3.0.1/lib
+
+# read configs for Xresources
+merge-xrdb
+
+# go stuff
+export GOROOT="/host/Installers/Programming Installers/Go/linux/go"
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
